@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <style media="screen" type="text/css">
+      html {
+        background: #111111;
+        height: 100%;
+        background: linear-gradient( #333, #000);
+      }
+      canvas {
+        display: none; 
+      }
+      video, img {
+        display: block;
+        float: left;
+        border: 10px solid #fff;
+        border-radius: 10px;
+      }
+      #container {
+        overflow: hidden;
+        width: 880px;
+        margin: 20px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <video id="video"></video>
+    <canvas id="canvas"></canvas>
+    <img src="http://placekitten.com/g/200/150" id="photo" alt="photo">
+    <script src="photo.js"></script> 
+  </body>
+</html>
