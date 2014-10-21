@@ -1,0 +1,6 @@
+%h1= "Join #{@room.name}"
+
+=form_for [@room, @user], url: room_user_path(@room.name) do |f|
+  = f.label "Name"
+  = f.text_field :name
+  = f.submit

@@ -1,0 +1,25 @@
+#studio {
+  display: none;
+}
+
+#pics {
+  height: 300px;
+
+  .pic {
+    display: table-cell;
+    position: relative;
+    width: 200px;
+    margin: 10px;
+
+    img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: -1;
+    }
+
+    span {
+      background: white;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+#pics
+
+#local
+  %video#video
+  %button#start
+    = "Start"
+  %button#stop
+    = "Stop"
+  %canvas#studio
+
+:javascript
+  $(document).ready(function() {
+    window.init_video();
+    $('#start').click(function () { window.startSending(8000) });
+    $('#stop').click(window.stopSending);
+
+    window.startSending(8000);
+    window.getPics(4000);
+  });
