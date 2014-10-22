@@ -1,10 +1,14 @@
 class RoomsController < ApplicationController
   def show
     @room = Room.includes(:users).find_by(name: params[:id])
+    begin
+      @user = User.find(session[:current_user_id])
+    rescue ActiveRecord::RecordNotFound
+      @user = nil
+    end
 
     respond_to do |format|
-      user_id = session[:current_user_id]
-      if user_id.blank? || User.where(id: user_id).empty?
+      if @user.nil?
         format.html { redirect_to new_room_user_path(@room.name) }
         format.json { render status: :unprocessable_entity }
       else

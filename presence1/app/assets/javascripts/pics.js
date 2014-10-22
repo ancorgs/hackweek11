@@ -14,10 +14,22 @@ function updatePics() {
       $('#pics .pic').map(function(i,e) { return $(e).data('id') })
     );
     var users = data['users'];
+    var myself = $('#pic').data('user-id');
 
     users.forEach(function(u) {
       var id = u['id'];
       var idx = old_pic_ids.indexOf(id);
+
+      // If there is an old image still stored server-side
+      // use it instead of the placeholder (is what others are watching)
+      if (id == myself) {
+        if (u['last_pic']) {
+          var holder = $('#user-placeholder');
+          if (holder.is(":visible"))
+            holder.attr('src', u['last_pic']);
+        }
+        return;
+      }
 
       // The pic already exists, update it
       if (idx >= 0) {

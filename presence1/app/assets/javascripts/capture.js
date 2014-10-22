@@ -3,13 +3,13 @@ function w() {
 }
 
 function h() {
-  return $('#video').attr('height');
+  return $('#pic-video').attr('height');
 }
 
 function init_video() {
-  var video = $('#video');
+  var video = $('#pic-video');
   var video_tag = video[0];
-  var studio = $('#studio');
+  var studio = $('#pic');
   video.attr('width', window.w());
   studio.attr('width', window.w());
   video.data('resized', false);
@@ -23,7 +23,7 @@ function init_video() {
   navigator.getMedia(
     { 
       video: true, 
-      audio: false 
+      audio: false
     },
     function(stream) {
       if (navigator.mozGetUserMedia) { 
@@ -42,20 +42,24 @@ function init_video() {
   video_tag.addEventListener('canplay', function(ev){
     // At some point, after some completely unrelated change,
     // I had to add a timeout to avoid videoWidth being 0
-    // in Firefox :-/
+    // in Firefox (known bug, apparently) :-/
+    var ms = 1;
+    if (/firefox/i.test(navigator.userAgent))
+      ms = 2000;
     window.setTimeout(
         function() {
           var height = video_tag.videoHeight / (video_tag.videoWidth/window.w());
+          video_tag.muted = "muted";
           video.attr('height', height);
           studio.attr('height', height);
           video.data('resized', true);
-        }, 2000);
+        }, ms);
   }, false);
 }
 
 function takePicture() {
-  var studio = $('#studio')[0];
-  var video = $('#video')[0];
+  var studio = $('#pic')[0];
+  var video = $('#pic-video')[0];
   var width = window.w();
   var height = window.h();
   var context = studio.getContext('2d');
@@ -73,12 +77,14 @@ function takePicture() {
   }
   //redraw the image in black & white
   context.putImageData(imgData, 0, 0);
+  $('#user-placeholder').hide();
+  $('#pic').show();
 }
 
 function sendStream(timeout) {
-  if ($('#video').data('streaming')) {
+  if ($('#pic-video').data('streaming')) {
     // Are we ready?
-    if ($('#video').data('resized')) {
+    if ($('#pic-video').data('resized')) {
       takePicture();
       updateUser();
       window.setTimeout(function() {sendStream(timeout)}, timeout);
@@ -96,7 +102,7 @@ function updateUser() {
     type: "PATCH",
     data: {
       user: {
-        last_pic: $('#studio')[0].toDataURL('image/png'),
+        last_pic: $('#pic')[0].toDataURL('image/png'),
         pic_height: window.h()
       }
     }
@@ -104,10 +110,14 @@ function updateUser() {
 }
 
 function startSending(timeout) {
-  $('#video').data('streaming', true);
+  $('#pic-video').data('streaming', true);
+  $('#start').hide();
+  $('#stop').show();
   sendStream(timeout);
 }
 
 function stopSending() {
-  $('#video').data('streaming', false);
+  $('#pic-video').data('streaming', false);
+  $('#start').show();
+  $('#stop').hide();
 }

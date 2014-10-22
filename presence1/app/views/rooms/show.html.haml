@@ -1,19 +1,31 @@
+%h2 Pics
 #pics
 
-#local
-  %video#video
-  %button#start
-    = "Start"
-  %button#stop
-    = "Stop"
-  %canvas#studio
+#pics_local
+  %canvas#pic{style: "display:none", data: {"user-id" => @user.id}}
+  =image_tag "user_placeholder.png", id: "user-placeholder"
+  %video#pic-video{style: "display:none"}
+  %button#start Start sending pics
+  %button#stop{style: "display:none"} Stop sending pics
+
+%h2 Videos
+#videos
+
+#videos_local
+  =image_tag "video_placeholder.png", id: "video-placeholder"
+  %video#video{style: "display:none"}
+  %button#join Start videocall
+  %button#leave{style: "display:none"} Stop videocall
 
 :javascript
+  var janusRoom = 1234
   $(document).ready(function() {
     window.init_video();
-    $('#start').click(function () { window.startSending(8000) });
+    window.initJanus();
+    $('#start').click(function () { window.startSending(20000) });
     $('#stop').click(window.stopSending);
+    $('#join').click(function () { window.startVideo("http://192.168.0.108:8088/janus", "#{@user.name}") });
+    $('#leave').click(window.stopVideo);
 
-    window.startSending(8000);
-    window.getPics(4000);
+    window.getPics(5000);
   });
