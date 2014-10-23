@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Presence2</title>
+  <link href="stylesheets/application.css" media="all" rel="stylesheet">
+  <script src="javascripts/jquery.min.js"></script>
+  <script src="javascripts/adapter.js"></script>
+  <script src="javascripts/janus.js"></script>
+  <script src="javascripts/data.js"></script>
+  <script src="javascripts/ui.js"></script>
+  <script src="javascripts/photo.js"></script>
+</head>
+<body>
+
+<h2>They</h2>
+<div id="peers"></div>
+<h2>You</h2>
+<div id="local">
+  <canvas style="display:none"></canvas>
+  <img src="images/user_placeholder.png">
+  <video style="display:none" width="200"></video>
+  <button id="video-on" style="display:none">Start video</button>
+  <button id="video-off" style="display:none">Stop video</button>
+</div>
+
+<script>
+  var janusVideoRoom = 1001;
+  var janusDataRoom = 1002;
+  // Global janus instance and URL for both video and data
+  // If needed it could be splited into 2 different janus servers
+  var janus = null;
+  var janusURL = "http://192.168.0.108:8088/janus";
+  // Just a prototype, generate a random username
+  var username = Math.random().toString(36).substring(7);
+
+  $(document).ready(function() {
+    // Initialize the library (console debug enabled)
+    Janus.init({debug: true});
+    window.initPhoto(200);
+    window.openDataChannel(username, function() { window.takePictures(10000) });
+  });
+</script>
+
+</body></html>

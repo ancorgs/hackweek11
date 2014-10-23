@@ -1,0 +1,25 @@
+#peers {
+  height: 200px;
+}
+
+#peers .peer {
+  display: table-cell;
+  position: relative;
+  width: 200px;
+  margin: 10px;
+}
+
+#peers .peer img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+
+#peers .peer span {
+  background: white;
+}
+
+#local video {
+  width: 200px;
+}
