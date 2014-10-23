@@ -1169,10 +1169,16 @@ function Janus(gatewayCallbacks) {
 			}
 			// If we got here, we're not screensharing
 			if(media.video !== 'screen') {
-				getUserMedia(
-					{audio:isAudioSendEnabled(media), video:videoSupport},
-					function(stream) { pluginHandle.consentDialog(false); streamsDone(handleId, jsep, media, callbacks, stream); },
-					function(error) { pluginHandle.consentDialog(false); callbacks.error(error); });
+				// If we are going to reuse a stream
+				if (media.stream != undefined && media.stream != null) {
+					config.sharedStream = true;
+					streamsDone(handleId, jsep, media, callbacks, media.stream);
+				} else {
+					getUserMedia(
+						{audio:isAudioSendEnabled(media), video:videoSupport},
+						function(stream) { pluginHandle.consentDialog(false); streamsDone(handleId, jsep, media, callbacks, stream); },
+						function(error) { pluginHandle.consentDialog(false); callbacks.error(error); });
+				}
 			}
 		} else {
 			// No need to do a getUserMedia, create offer/answer right away
@@ -1329,7 +1335,7 @@ function Janus(gatewayCallbacks) {
 		config.bitrate.tsnow = null;
 		config.bitrate.tsbefore = null;
 		config.bitrate.value = null;
-		if(config.myStream !== null && config.myStream !== undefined) {
+		if(!config.sharedStream && config.myStream !== null && config.myStream !== undefined) {
 			Janus.log("Stopping local stream");
 			config.myStream.stop();
 		}

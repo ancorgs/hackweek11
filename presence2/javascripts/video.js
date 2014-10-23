@@ -184,7 +184,7 @@ function publishOwnVideoFeed() {
   // Publish our stream
   videoHandle.createOffer(
     {
-      media: { audioRecv: false, videoRecv: false},	// Publishers are sendonly
+      media: { audioRecv: false, videoRecv: false, stream: mediaStream},	// Publishers are sendonly
       success: function(jsep) {
         videoLog("Got publisher SDP!");
         videoLog(jsep);

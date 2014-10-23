@@ -19,7 +19,7 @@
 <div id="local">
   <canvas style="display:none"></canvas>
   <img src="images/user_placeholder.png">
-  <video style="display:none" width="200"></video>
+  <video style="display:none" muted="muted" width="200"></video>
   <button id="video-on">Start video</button>
   <button id="video-off" style="display:none">Stop video</button>
 </div>
@@ -31,6 +31,8 @@
   // If needed it could be splited into 2 different janus servers
   var janus = null;
   var janusURL = "http://" + window.location.hostname + ":8088/janus";
+  // To share the media stream for pictures and video
+  var mediaStream;
   // Just a prototype, generate a random username
   var username = Math.random().toString(36).substring(7);
 

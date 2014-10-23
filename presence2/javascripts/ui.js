@@ -22,7 +22,6 @@ function uiUpdatePeer(content) {
 function uiLocalVideo(stream) {
   $("#video-on").hide();
   $("#video-off").show();
-  attachMediaStream($('#local video').get(0), stream);
   $('#local video').show();
   $('#local canvas').hide();
 }

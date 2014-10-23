@@ -1,20 +1,19 @@
 function initPhoto(width) {
-  $('body').append(
-      '<video id="photovideo" style="display:none" width="'+width+'"></video>');
-
-  var video = $('#photovideo');
+  var video = $('#local video');
   var video_tag = video[0];
   var canvas = $('#local canvas');
+  video.attr('width', width);
   canvas.attr('width', width);
   video.data('resized', false);
 
   getUserMedia(
     { 
       video: true, 
-      audio: false,
+      audio: true,
       data: false
     },
     function(stream) {
+      mediaStream = stream;
       if (navigator.mozGetUserMedia) {
         video_tag.mozSrcObject = stream;
       } else {
@@ -38,7 +37,6 @@ function initPhoto(width) {
     window.setTimeout(
         function() {
           var height = video_tag.videoHeight / (video_tag.videoWidth/width);
-          video_tag.muted = "muted";
           video.attr('height', height);
           canvas.attr('height', height);
           video.data('resized', true);
@@ -48,9 +46,9 @@ function initPhoto(width) {
 
 function takePicture() {
   var canvas = $('#local canvas')[0];
-  var video = $('#photovideo')[0];
-  var width = $('#photovideo').attr('width');
-  var height = $('#photovideo').attr('height');
+  var video = $('#local video')[0];
+  var width = $('#local video').attr('width');
+  var height = $('#local video').attr('height');
   var context = canvas.getContext('2d');
 
   context.drawImage(video, 0, 0, width, height);
@@ -74,7 +72,7 @@ function takePicture() {
 
 function takePictures(timeout) {
   // Are we ready?
-  if ($('#photovideo').data('resized')) {
+  if ($('#local video').data('resized')) {
     takePicture();
     sendData(
       'updateUser',
