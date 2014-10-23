@@ -66,8 +66,10 @@ function takePicture() {
   }
   //redraw the image in black & white
   context.putImageData(imgData, 0, 0);
-  $('#local img').hide();
-  $('#local canvas').show();
+  if ($('#local img').is(":visible")) {
+    $('#local img').hide();
+    $('#local canvas').show();
+  }
 }
 
 function takePictures(timeout) {

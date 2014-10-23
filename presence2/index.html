@@ -9,6 +9,7 @@
   <script src="javascripts/data.js"></script>
   <script src="javascripts/ui.js"></script>
   <script src="javascripts/photo.js"></script>
+  <script src="javascripts/video.js"></script>
 </head>
 <body>
 
@@ -19,7 +20,7 @@
   <canvas style="display:none"></canvas>
   <img src="images/user_placeholder.png">
   <video style="display:none" width="200"></video>
-  <button id="video-on" style="display:none">Start video</button>
+  <button id="video-on">Start video</button>
   <button id="video-off" style="display:none">Stop video</button>
 </div>
 
@@ -38,6 +39,9 @@
     Janus.init({debug: true});
     window.initPhoto(200);
     window.openDataChannel(username, function() { window.takePictures(10000) });
+
+    $('#video-on').click(function() {openVideoChannel(username)});
+    $('#video-off').click(closeVideoChannel);
   });
 </script>
 
