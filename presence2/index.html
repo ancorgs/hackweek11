@@ -14,14 +14,14 @@
 <body>
 
 <h2>They</h2>
+<p>Click in somebody to include him/her into the videocall.</p>
 <div id="peers"></div>
 <h2>You</h2>
 <div id="local">
   <canvas style="display:none"></canvas>
   <img src="images/user_placeholder.png">
   <video style="display:none" muted="muted"></video>
-  <button id="video-on">Start video</button>
-  <button id="video-off" style="display:none">Stop video</button>
+  <button id="video-off" style="display:none">Get out of the call</button>
 </div>
 
 <script>
@@ -42,7 +42,6 @@
     window.initPhoto(320);
     window.openDataChannel(username, function() { window.takePictures(10000) });
 
-    $('#video-on').click(function() {openVideoChannel(username)});
     $('#video-off').click(closeVideoChannel);
   });
 </script>

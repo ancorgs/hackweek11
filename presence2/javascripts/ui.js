@@ -5,6 +5,10 @@ function uiAddPeer(name) {
   content += '<video style="display: none"></video></div>';
   $('#peers').append(content);
   $('#peer-'+name).fadeIn();
+  $('#peer-'+name).click(function() {
+    sendData('videoCall', name);
+    openVideoChannel();
+  });
 }
 
 function uiRemovePeer(name) {
@@ -20,14 +24,12 @@ function uiUpdatePeer(content) {
 }
 
 function uiLocalVideo(stream) {
-  $("#video-on").hide();
   $("#video-off").show();
   $('#local video').show();
   $('#local canvas').hide();
 }
 
 function uiStopVideo() {
-  $("#video-on").show();
   $("#video-off").hide();
   $('#local video').hide();
   $('#local canvas').show();

@@ -173,6 +173,8 @@ function newRemoteDataFeed(id, display) {
         dataLog(type);
         if(type === "updateUser") {
           uiUpdatePeer(content);
+        } else if (type === "videoCall" && content === username) {
+          openVideoChannel();
         } else {
           // Sorry, but I don't understand you
         }

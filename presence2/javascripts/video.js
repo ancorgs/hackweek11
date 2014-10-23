@@ -1,7 +1,9 @@
 var videoHandle = null;
 var videoFeeds = [];
 
-function openVideoChannel(display) {
+function openVideoChannel() {
+  if (videoHandle != null)
+    return;
   // Create session
   janus.attach(
     {
@@ -9,7 +11,7 @@ function openVideoChannel(display) {
       success: function(pluginHandle) {
         videoHandle = pluginHandle;
         videoLog("Plugin for published/master attached. ( id=" + videoHandle.getId() + ")");
-        var register = { "request": "join", "room": janusVideoRoom, "ptype": "publisher", "display": display };
+        var register = { "request": "join", "room": janusVideoRoom, "ptype": "publisher", "display": username };
         videoHandle.send({"message": register});
       },
       error: function(error) {
@@ -78,6 +80,7 @@ function openVideoChannel(display) {
       },
       oncleanup: function() {
         videoLog(" ::: Got a cleanup notification: we are unpublished now :::");
+        videoHandle = null;
         uiStopVideo();
       }
     });
@@ -209,6 +212,7 @@ function closeVideoChannel() {
     }
   }
   videoHandle.detach();
+  videoHandle = null;
   uiStopVideo();
 }
 
