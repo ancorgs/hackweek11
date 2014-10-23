@@ -8,7 +8,7 @@ function initPhoto(width) {
 
   getUserMedia(
     { 
-      video: true, 
+      video: {"mandatory": {"maxHeight": "240", "maxWidth": "320"}, "optional": []},
       audio: true,
       data: false
     },
@@ -77,7 +77,7 @@ function takePictures(timeout) {
     sendData(
       'updateUser',
       {
-        img: $('#local canvas')[0].toDataURL('image/jpeg',0.7),
+        img: $('#local canvas')[0].toDataURL('image/jpeg',0.4),
         name: username
       });
     window.setTimeout(function() {takePictures(timeout)}, timeout);

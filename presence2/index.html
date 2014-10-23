@@ -19,7 +19,7 @@
 <div id="local">
   <canvas style="display:none"></canvas>
   <img src="images/user_placeholder.png">
-  <video style="display:none" muted="muted" width="200"></video>
+  <video style="display:none" muted="muted"></video>
   <button id="video-on">Start video</button>
   <button id="video-off" style="display:none">Stop video</button>
 </div>
@@ -39,7 +39,7 @@
   $(document).ready(function() {
     // Initialize the library (console debug enabled)
     Janus.init({debug: true});
-    window.initPhoto(200);
+    window.initPhoto(320);
     window.openDataChannel(username, function() { window.takePictures(10000) });
 
     $('#video-on').click(function() {openVideoChannel(username)});
