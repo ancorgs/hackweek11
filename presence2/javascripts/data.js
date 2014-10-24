@@ -125,7 +125,7 @@ function newRemoteDataFeed(id, display) {
         if(event != undefined && event != null) {
           if(event === "attached") {
             // Subscriber created and attached
-            for(var i=1;i<10;i++) {
+            for(var i=1;i<20;i++) {
               if(dataFeeds[i] === undefined || dataFeeds[i] === null) {
                 dataFeeds[i] = remoteFeed;
                 remoteFeed.rfindex = i;
@@ -197,7 +197,7 @@ function subscribeDataFeeds(list) {
 
 function detachDataRemoteFeed(feedID) {
   var remoteFeed = null;
-  for(var i=1; i<6; i++) {
+  for(var i=1; i<20; i++) {
     if(dataFeeds[i] != null && dataFeeds[i] != undefined && dataFeeds[i].rfid == feedID) {
       remoteFeed = dataFeeds[i];
       break;

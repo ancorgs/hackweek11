@@ -111,7 +111,7 @@ function newRemoteVideoFeed(id, display) {
         if(event != undefined && event != null) {
           if(event === "attached") {
             // Subscriber created and attached
-            for(var i=1;i<10;i++) {
+            for(var i=1;i<20;i++) {
               if(videoFeeds[i] === undefined || videoFeeds[i] === null) {
                 videoFeeds[i] = remoteFeed;
                 remoteFeed.rfindex = i;
@@ -169,7 +169,7 @@ function subscribeVideoFeeds(list) {
 
 function detachVideoRemoteFeed(feedID) {
   var remoteFeed = null;
-  for(var i=1; i<10; i++) {
+  for(var i=1; i<20; i++) {
     if(videoFeeds[i] != null && videoFeeds[i] != undefined && videoFeeds[i].rfid == feedID) {
       remoteFeed = videoFeeds[i];
       break;
@@ -204,7 +204,7 @@ function publishOwnVideoFeed() {
 
 function closeVideoChannel() {
   var remoteFeed = null;
-  for(var i=1; i<10; i++) {
+  for(var i=1; i<20; i++) {
     if(videoFeeds[i] != null && videoFeeds[i] != undefined) {
       remoteFeed = videoFeeds[i];
       videoFeeds[i] = null;
