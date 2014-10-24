@@ -49,3 +49,20 @@ function uiStopPeerVideo(name) {
   $(id+' video').hide();
   $(id+' img').show();
 }
+
+function uiAskForCamera(enabled) {
+  if (enabled) {
+    $.blockUI({
+      message: '<div><img src="images/up_arrow.png"/></div>',
+      css: {
+        border: 'none',
+        padding: '15px',
+        backgroundColor: 'transparent',
+        color: '#aaa',
+        top: '10px',
+        left: (navigator.mozGetUserMedia ? '-100px' : '300px')
+      } });
+  } else {
+    $.unblockUI();
+  }
+}

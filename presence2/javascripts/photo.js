@@ -6,6 +6,7 @@ function initPhoto(width) {
   canvas.attr('width', width);
   video.data('resized', false);
 
+  uiAskForCamera(true);
   getUserMedia(
     { 
       video: {"mandatory": {"maxHeight": "240", "maxWidth": "320"}, "optional": []},
@@ -21,9 +22,11 @@ function initPhoto(width) {
         video_tag.src = vendorURL ? vendorURL.createObjectURL(stream) : stream;
       }
       video_tag.play();
+      uiAskForCamera(false);
     },
     function(err) {
       console.log("An error occured! " + err);
+      uiAskForCamera(false);
     }
   );
 
