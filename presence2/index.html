@@ -36,14 +36,17 @@ use Chrome/Chromium.</p>
   var janusURL = "http://" + window.location.hostname + ":8088/janus";
   // To share the media stream for pictures and video
   var mediaStream;
-  // Just a prototype, generate a random username
-  var username = Math.random().toString(36).substring(7);
 
   $(document).ready(function() {
-    // Initialize the library (console debug enabled)
-    Janus.init({debug: true});
-    window.initPhoto(320);
-    window.openDataChannel(username, function() { window.takePictures(10000) });
+    var username = prompt("Enter your username (be creative, this prototype does not detect duplicates):");
+    if (username) {
+      // Initialize the library (console debug enabled)
+      Janus.init({debug: true});
+      window.initPhoto(320);
+      window.openDataChannel(username, function() { window.takePictures(10000) });
+    } else {
+      window.location.reload();
+    }
 
     $('#video-off').click(closeVideoChannel);
   });
