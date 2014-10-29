@@ -1,30 +1,37 @@
-#peers .peer {
-  display: inline-block;
-  position: relative;
-  width: 320px;
-  margin: 10px;
-  height: 240px;
+* {
+  box-sizing: border-box;
 }
 
-#peers .peer img {
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: -1;
+#peers {
+  display: flex;
+  font-size: 0;
+  flex-flow: row wrap;
+  max-width: 2500px;
+  margin: 0 auto;
 }
 
-#peers .peer video {
-  position: absolute;
-  width: 320px;
-  left: 0;
-  top: 0;
-  z-index: -1;
+#peers figure {
+  margin: 0;
+  min-width: 81px;
+  flex: 0.67;
+  transition: .5s;
 }
 
-#peers .peer span {
-  background: white;
+#peers figure img {
+  width: 100%;
+  height: auto;
 }
 
-#local video {
-  width: 320px;
+#peers figure video {
+  width: 100%;
+  height: auto;
+}
+
+#peers figure canvas {
+  width: 100%;
+  height: auto;
+}
+
+#peers figure figcaption {
+  font-size: 12px;
 }

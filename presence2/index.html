@@ -14,17 +14,21 @@
 </head>
 <body>
 
-<p><strong>Firefox is not supported at the moment due to a bug.</strong> Please
-use Chrome/Chromium.</p>
-<h2>They</h2>
-<p>Click in somebody to include him/her into the videocall.</p>
-<div id="peers"></div>
-<h2>You</h2>
-<div id="local">
-  <canvas style="display:none"></canvas>
-  <img src="images/user_placeholder.png">
-  <video style="display:none" muted="muted"></video>
-  <button id="video-off" style="display:none">Get out of the call</button>
+<p>Due to a bug in the server part, <strong>Firefox only works if you are using
+ a nigthly build</strong>. Please use Chrome/Chromium.</p>
+<p>Resize at will. You will get an updated snapshot of your colleagues desk every 20
+seconds. Click in somebody to include him/her into a videocall. The call will start
+right away. For more information, read
+<a href="https://etherpad.nue.suse.com/p/hackweek-videocalls">this
+etherpad</a></p>
+<button id="video-off" style="display:none">Get out of the call</button>
+<div id="peers">
+  <figure id="local">
+    <figcaption>You</figcaption>
+    <canvas style="display:none"></canvas>
+    <img src="images/user_placeholder.png">
+    <video style="display:none" muted="muted"></video>
+  </figure>
 </div>
 
 <script>
@@ -34,6 +38,7 @@ use Chrome/Chromium.</p>
   // If needed it could be splited into 2 different janus servers
   var janus = null;
   var janusURL = "http://" + window.location.hostname + ":8088/janus";
+  //var janusURL = "http://192.168.0.108:8088/janus";
   // To share the media stream for pictures and video
   var mediaStream;
   var username = null;
@@ -44,7 +49,7 @@ use Chrome/Chromium.</p>
       // Initialize the library (console debug enabled)
       Janus.init({debug: true});
       window.initPhoto(320);
-      window.openDataChannel(username, function() { window.takePictures(10000) });
+      window.openDataChannel(username, function() { window.takePictures(20000) });
     } else {
       window.location.reload();
     }

@@ -1,9 +1,9 @@
 function uiAddPeer(name) {
-  var content = '<div style="display: none" id="peer-'+name+'" data-name="'+name+'" class="peer">';
-  content += '<span class="name">'+name+'</span>';
+  var content = '<figure style="display: none" id="peer-'+name+'" data-name="'+name+'" class="peer">';
+  content += '<figcaption>'+name+'</figcaption>';
   content += '<img src="images/user_placeholder.png" />';
-  content += '<video style="display: none"></video></div>';
-  $('#peers').append(content);
+  content += '<video style="display: none"></video></figure>';
+  $('#peers').prepend(content);
   $('#peer-'+name).fadeIn();
   $('#peer-'+name).click(function() {
     sendData('videoCall', name);
